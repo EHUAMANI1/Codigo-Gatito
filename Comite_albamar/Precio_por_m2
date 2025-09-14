@@ -1,0 +1,369 @@
+Sub PRECIO_M2()
+  ' Gráfico de Precio por Metro Cuadro de cada Proyecto
+  ' Hecho por Eduardo Miguel Huamani Acosta en 30/06/25
+  
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    Application.EnableEvents = False
+    Application.DisplayAlerts = False
+    
+    Call DeclareWorksheets
+    Set wAC = wCMX
+
+    lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+
+    Call cleanSheet(wAC)
+
+    Dim N_POS       As Long
+    C_COD = 67
+    N_POS = wORDC.Columns(C_COD).Find(What:=ACT_COD, LookAt:=xlWhole, MatchCase:=False).Row
+
+    Dim CODA_IN     As String
+    Dim CODA_OUT    As String
+    CODA_IN = wAC.Cells(2, 3).value
+    CODA_OUT = wAC.Cells(3, 3).value
+    
+    Dim CODY_IN     As Integer
+    Dim CODY_OUT    As Integer
+    CODY_IN = wAC.Cells(2, 4).value
+    CODY_OUT = wAC.Cells(3, 4).value
+    
+    'Dim ACT_COD     As String
+    ACT_COD = wAC.Cells(4, 3).value
+
+    Call InicializarVEC_MESCD
+
+    validado = validateInputComites(CODA_IN, VEC_MESCD, CODA_OUT, CODY_IN, CODY_OUT, ACT_COD, N_POS, C_COD)
+
+    If validado Then
+        'Debug.Print ("Validación exitosa")
+    Else
+        MsgBox "Validación fallida"
+        Exit Sub
+    End If
+
+    'CODIGO PARA TOMAR EN CUENTA EL MES DE LANZAMIENTO
+    
+    Dim ComienzaLanzamiento As Boolean
+    mesIngresado = UCase(wAC.Cells(2, 3).value)
+    
+    For i = 1 To 12
+        If VEC_MESCD(i) = mesIngresado Then
+            mesNumero = i
+            Exit For
+        End If
+    Next i
+    
+    COL_COD = obtenerColumna(wORDC, "COD")
+    COL_LANZAMIENTO = obtenerColumna(wORDC, "LANZAMIENTO")
+    FILA_PROYECTO = N_POS
+    
+    'Obtener fecha de lanzamiento del proyecto, para delimitar el minimo comienzo para el proyecto.
+    Call replaceProjectLaunch(FILA_PROYECTO, COL_LANZAMIENTO, VEC_MESCD, CODY_IN, CODA_IN, mesNumero, ComienzaLanzamiento)
+    
+    'CIERRE CODIGO PARA TOMAR EN CUENTA EL MES DE LANZAMIENTO
+    
+    Application.DisplayAlerts = False
+    Application.ScreenUpdating = False
+    
+    Call emptySheetAndCopyValues(wAC, CODA_IN, CODA_OUT, ACT_COD, CODY_IN, CODY_OUT)
+
+    With wORDC
+    
+        Dim ACT_PRY     As String
+        C_PRYCT = obtenerColumna(wORDC, "PRYCT")
+        ACT_PRY = .Cells(N_POS, C_PRYCT).value
+        
+        Dim ACT_TTL_PRY As String
+        C_NLIMP = obtenerColumna(wORDC, "NLIMP")
+        ACT_TTL_PRY = .Cells(N_POS, C_NLIMP).value
+        
+        Dim ACT_SQM     As String
+        C_T_ESQ = obtenerColumna(wORDC, "T_ESQ")
+        ACT_SQM = wORDC.Cells(N_POS, C_T_ESQ).value
+
+    End With
+
+    If Not ACT_SQM = "NO" Then
+        'MsgBox "Hay esquematico"
+        Set wESQ = ThisWorkbook.Sheets(ACT_SQM)
+        LastSQM = wESQ.Cells(wESQ.Rows.Count, "A").End(xlUp).Row
+    Else
+        MsgBox "No hay esquematico"
+        Exit Sub
+    End If
+    
+    '#########################################################FECHAS#########################################################
+    
+    Dim N_BGN       As Date
+    N_BGN = DateSerial(CODY_IN, Application.Match(CODA_IN, VEC_MESCD, False), 1)
+    Dim N_END       As Date
+    N_END = DateSerial(CODY_OUT, Application.Match(CODA_OUT, VEC_MESCD, False), 1)
+    Dim N_DIF       As Integer
+    N_DIF = DateDiff("m", N_BGN, N_END) + 1
+    
+    Dim ACT_FINI    As String
+    ACT_FINI = wORDC.Cells(N_POS, 58).value
+    
+    Dim T_ACTP      As Integer        'Tiempo de vida del proyecto
+    T_ACTP = DateDiff("m", ACT_FINI, N_END) + 1
+  
+    Dim VEC_DATES()
+    ReDim VEC_DATES(N_DIF, 2)
+    
+    Dim VEC_MATCH()
+    ReDim VEC_MATCH(N_DIF)
+    
+    For i = 1 To N_DIF
+        VEC_DATES(i, 1) = Application.EoMonth(N_BGN, i - 2)
+        VEC_DATES(i, 2) = Application.EoMonth(N_BGN, i - 1)
+        VEC_MATCH(i) = Application.EoMonth(N_BGN, i - 2)
+    Next i
+    
+    '#########################################################RANGOS#########################################################
+    
+    Dim VEC_CODEX   As Variant        'CODIGOS
+    Dim VEC_STATS   As Variant        'STATUS
+    Dim VEC_PRCM2   As Variant        'PRECIOM2
+    Dim VEC_NDORM   As Variant        'N°DORMITORIOS
+
+    Dim VEC_TIPON()        '*NUMEROS
+    ReDim VEC_TIPON(LastSQM)
+    Dim VEC_FCHVN()        '*FECHA
+    ReDim VEC_FCHVN(LastSQM)
+
+    VEC_CODEX = wESQ.Range(wESQ.Cells(1, 14), wESQ.Cells(LastSQM, 14))        'CODIGOS
+    VEC_STATS = wESQ.Range(wESQ.Cells(1, 11), wESQ.Cells(LastSQM, 11))        'STATUS
+    VEC_PRCM2 = wESQ.Range(wESQ.Cells(1, 10), wESQ.Cells(LastSQM, 10))        'PRECIOM2
+    VEC_NDORM = wESQ.Range(wESQ.Cells(1, 2), wESQ.Cells(LastSQM, 2))        'N°DORMITORIOS
+    
+    Call EXFILTROSOFF
+    
+    For k = 2 To LastSQM
+        If Not VEC_STATS(k, 1) = "Disponible" Then
+           X_CRNT = ws.Columns(1).Find(What:=VEC_CODEX(k, 1), LookAt:=xlWhole, MatchCase:=False).Row
+           VEC_FCHVN(k) = ws.Cells(X_CRNT, 46).value        '*FECHA
+        End If
+    Next k
+    
+    '#########################################################ALMACENAJE#########################################################
+    
+    Dim TDORM(5) 'Tipo de Dormitorio
+    TDORM(1) = "1D"
+    TDORM(2) = "1D LOFT"
+    TDORM(3) = "2D"
+    TDORM(4) = "3D"
+    TDORM(5) = "3D+1"
+
+    Dim C_D As Integer
+    C_D = UBound(TDORM) + 1  'Cantidad de dormitorios + 1
+
+    Dim VEC_MAVAN()
+    ReDim VEC_MAVAN(N_DIF + 2, C_D)
+    For i = 1 To N_DIF + 2
+        For j = 1 To C_D
+                VEC_MAVAN(i, j) = 0
+        Next j
+    Next i
+    
+    Dim VEC_MAXG()
+    ReDim VEC_MAXG(C_D, 2)
+    
+    Dim VEC_CALM2()
+    ReDim VEC_CALM2(N_DIF + 1, C_D)
+    
+    Dim m As Integer
+    For i = 1 To 2
+        For j = 1 To C_D
+            VEC_MAXG(j, i) = 0
+        Next j
+    Next i
+    
+    '#########################################################ALMACENAJE DE LOS DATOS#########################################################
+    
+    Dim POS_COL     As Integer   'Posición de los meses en donde irá ubicado los departamentos
+    
+    For i = 2 To LastSQM
+        
+        If VEC_FCHVN(i) <= Application.EoMonth(VEC_MATCH(N_DIF), 1) And VEC_FCHVN(i) > 0 Then        'Consulta si esta en nuestro tramo de vista
+        
+        '@@@@@@@@@@@@ AVANCE DEPARTAMENTOS Y ABSORCION
+        
+            If IsError(Application.Match(Application.EoMonth(VEC_FCHVN(i), -1), VEC_MATCH, False)) Then        'Elegimos columna
+                If VEC_FCHVN(i) <= VEC_MATCH(1) Then
+                    POS_COL = 1
+                End If
+            Else
+                POS_COL = Application.Match(Application.EoMonth(VEC_FCHVN(i), -1), VEC_MATCH, False)
+            End If
+        
+            If Application.EoMonth(VEC_FCHVN(i), -1) > 45500 Then
+            End If
+            
+            VEC_MAVAN(POS_COL, C_D) = VEC_MAVAN(POS_COL, C_D) + 1
+            VEC_MAVAN(0, C_D) = VEC_MAVAN(0, C_D) + 1
+            
+            'Avance de Precio por Metro Cuadrado
+            VEC_CALM2(POS_COL, 0) = VEC_CALM2(POS_COL, 0) + VEC_PRCM2(i, 1)
+            VEC_CALM2(0, 0) = VEC_CALM2(0, 0) + VEC_PRCM2(i, 1)
+            
+         End If
+
+    Next i
+
+'====================================================================================================================================================================
+    
+    'RESUMEN DE PRECIOS POR METRO CUADRADO POR MESES
+
+    Dim RiniT           As Integer
+    RiniT = 5
+    Dim CiniT           As Integer
+    CiniT = 8
+
+    ' Encabezado de los meses de los Precios por Metro Cuadrado
+    Call encabezadoMeses(RiniT, CiniT, VEC_DATES, N_DIF, RWS_CD, 2, False)
+
+    'Subtitulo del Precio por Metro Cuadrado
+    wAC.Cells(RiniT, CiniT + 1) = "Prev."
+    wAC.Cells(RiniT, CiniT + 1).Interior.Color = RGB(253, 127, 43)
+    wAC.Cells(RiniT + 1, CiniT).value = "Total"
+    wAC.Cells(RiniT + 1, CiniT).Interior.Color = RGB(253, 127, 43)
+
+    ' Título de el Precio por Metro Cuadrado Mensual
+    wAC.Cells(RiniT - 1, CiniT + 2) = "Avance m2 vendido"
+    wAC.Cells(RiniT - 1, CiniT + 2).Interior.Color = vbBlack
+    wAC.Cells(RiniT - 1, CiniT + 2).Font.Color = vbWhite
+    wAC.Cells(RiniT - 1, CiniT + 2).HorizontalAlignment = xlCenter
+    wAC.Range(wAC.Cells(RiniT - 1, CiniT + 2), wAC.Cells(RiniT - 1, CiniT + N_DIF + 1)).Merge 'Une el titulo de avance por metro cuadrado
+
+
+    'Impresión de los Precios por Metro Cuadrado por cada Proyecto
+
+    For j = 1 To N_DIF + 1
+
+        If VEC_MAVAN(j, C_D) = 0 Then
+            wAC.Cells(RiniT + 1, CiniT + j).value = 0
+        Else
+            wAC.Cells(RiniT + 1, CiniT + j).value = VEC_CALM2(j, 0) / VEC_MAVAN(j, C_D)
+        End If
+    Next j
+    
+    wAC.Range(wAC.Cells(RiniT + 1, CiniT + 1), wAC.Cells(RiniT + 1, CiniT + N_DIF + 1)).HorizontalAlignment = xlCenter
+    wAC.Range(wAC.Cells(RiniT + 1, CiniT + 1), wAC.Cells(RiniT + 1, CiniT + N_DIF + 1)).NumberFormat = "#,##0.00"
+
+' ============================================================================================================================================================
+    'Creamos el Gráfico de Barras
+    
+    Dim L_CHART As Integer
+    Dim min_precio As Double
+    Dim alto As Integer
+    Dim pt As Point
+    
+    L_CHART = Application.Min(N_DIF, T_ACTP)
+    
+    'Quiero borrar la columna de prev si es que su lanzamiento fue menor a un aÑo
+    Columnas_Eliminar = obtenerColumna(wAC, "Prev.", 5)
+    wAC.Columns(Columnas_Eliminar).Delete
+        
+    'Selecciono el precio por Metro Cuadrado con sus meses
+    Set RangeChart1 = wAC.Range(wAC.Cells(RiniT, CiniT + N_DIF + 1 - L_CHART), wAC.Cells(RiniT, CiniT + N_DIF)) ' Meses y años
+    Set RangeChart2 = wAC.Range(wAC.Cells(RiniT + 1, CiniT + N_DIF + 1 - L_CHART), wAC.Cells(RiniT + 1, CiniT + N_DIF)) ' Precio por Metro Cuadrado por Mes
+    Set RangeChart3 = Union(RangeChart1, RangeChart2) ' Unión de los datos seleccionados
+
+    'Ubicamos la hoja en donde se va a pegar la imagen
+    wAC.Shapes.AddChart2(216, xlBarClustered).Select
+    Worksheets("CMX-RES").Activate   'Me dirige a la hoja CMX-RES
+    ActiveChart.SetSourceData Source:=RangeChart3 'CREAR NOMBRE
+
+    Set X_CHART = ActiveChart
+
+    ' Determinamos el tamaño del gráfico
+    diferenciaColumna = 28
+    alto = N_DIF
+    
+    With X_CHART
+        .Parent.Width = 230 * diferenciaColumna / 14 ' Ancho del Gráfico
+        .Parent.Height = 400 * (0.5 + alto / 28) ' Alto del Gráfico
+    End With
+    
+    ' Valor Minimo de los datos
+    min_precio = Application.WorksheetFunction.Min(wAC.Range(wAC.Cells(RiniT + 1, CiniT + N_DIF + 1 - L_CHART), wAC.Cells(RiniT + 1, CiniT + N_DIF)))
+
+    ' Distancia entre las barras
+    X_CHART.ChartGroups(1).GapWidth = 40
+    
+    'Aumenta todos los textos de la imagen
+    X_CHART.ChartArea.Format.TextFrame2.TextRange.Font.Size = 12
+    
+    ' Ubicación de Gráfico
+    With X_CHART
+        .Parent.Left = wAC.Cells(RiniT + 2, CiniT).Left 'Posiciona el borde izquierdo del gráfico
+        .Parent.Top = wAC.Cells(RiniT + 3, CiniT).Top  'Posiciona el borde superior del gráfico
+    End With
+
+    ' Título del Gráfico
+    With X_CHART
+        .ChartTitle.Text = "Precio por m2 - " & ACT_TTL_PRY 'Nombre del Título
+        .ChartTitle.Font.Size = 18 ' Tamaño del Título
+        .ChartTitle.Font.Bold = False 'Título en Negrita
+        .ChartTitle.Font.Color = vbBlack 'Se le da el color negro al título
+    End With
+
+    ' Se agrega etiquetas dentro del gráfico
+    X_CHART.SetElement (msoElementDataLabelInsideEnd)
+
+    'Formato del Gráfico
+    With X_CHART
+        .FullSeriesCollection(1).DataLabels.Format.TextFrame2.TextRange.Font.Bold = msoFalse
+        .FullSeriesCollection(1).DataLabels.Position = xlLabelPositionOutsideEnd
+        .FullSeriesCollection(1).DataLabels.NumberFormat = """S/"" #,##0"
+        .FullSeriesCollection(1).DataLabels.Format.TextFrame2.TextRange.Font.Fill.ForeColor.RGB = Azul_Oficial
+        .FullSeriesCollection(1).Format.Fill.ForeColor.RGB = Azul_Oficial 'Cambia de color de gráfico de barras
+        .Axes(xlValue, xlPrimary).HasMajorGridlines = False
+    End With
+    
+    For Each pt In X_CHART.FullSeriesCollection(1).Points
+        If pt.DataLabel.Text = Format(0, pt.DataLabel.NumberFormat) Then pt.DataLabel.Font.Color = vbWhite
+    Next pt
+
+    'Quitamos la leyenda del gráfico
+    ActiveChart.SetElement (msoElementLegendRight)
+    ActiveChart.SetElement (msoElementLegendNone)
+
+    ' Obtener el objeto ChartObject que contiene el grafico
+    Set graficoObjeto = ActiveSheet.ChartObjects(1) ' Asegurate de que este es el grafico correcto
+    Set X_CHART = graficoObjeto.chart
+
+    ' Obtener los valores minimo y maximo del eje X
+    X_CHART.Axes(xlValue).MinimumScale = (min_precio \ 1000) * 1000
+    maxX = X_CHART.Axes(xlValue).MaximumScale
+
+    ' Obtener el ancho del area de gráfico
+    anchoGrafico = X_CHART.PlotArea.InsideWidth
+
+    ' Determinar la altura del grafico
+    topInicio = graficoObjeto.Top + X_CHART.PlotArea.InsideTop
+    topFin = graficoObjeto.Top + X_CHART.PlotArea.InsideTop + X_CHART.PlotArea.InsideHeight
+
+    ' Quitar decimales al eje X
+    X_CHART.Axes(xlValue).TickLabels.NumberFormat = "#,##0"
+    
+    ' Quitar bordes al gráfico
+    X_CHART.ChartArea.Format.Line.Visible = msoFalse
+    
+    '#########################################################IMPRIME#########################################################
+    
+    For Each cmmt In wAC.Comments
+        cmmt.Shape.TextFrame.AutoSize = True
+    Next cmmt
+
+    '#########################################################################################################################
+
+    Call activateScreen
+    
+    Application.ScreenUpdating = True
+    Application.Calculation = xlCalculationAutomatic
+    Application.EnableEvents = True
+    Application.DisplayAlerts = True
+
+End Sub
