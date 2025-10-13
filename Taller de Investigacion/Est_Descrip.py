@@ -1,4 +1,5 @@
 # Estadistica Descriptiva
+
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +9,9 @@ from scipy.stats import kurtosis, skew, norm
 import numpy as np
 from matplotlib.ticker import FuncFormatter # <-- Importante tener esta línea
 
-# --- 1. CONFIGURACIÓN DE RUTAS, HOJA Y VARIABLE ---
+# -------------------------------------------------------------------------------------------------------------------------------
+# RUTA DE LOS ARCHIVOS Y MODIFICACION DE VARIABLES
+# -------------------------------------------------------------------------------------------------------------------------------
 
 # Obtener el directorio actual
 base_dir = os.getcwd()
@@ -16,12 +19,15 @@ base_dir = os.getcwd()
 # Ruta al archivo de entrada
 Entrada = os.path.join(base_dir, 'Flujo', 'input', 'Calculos WACC.xlsx')
 
-# --- ¡MODIFICA AQUÍ! ---
+# Variables a modificar
 nombre_de_la_hoja = 'Riesgo País' #Hoja del archivo
 variable = 'Riesgo Pais' # Nombre de la variable
 mostrar_histograma_en_porcentaje = True #Histograma en porcentaje
 
-# --- 2. CARGA Y PREPARACIÓN DE DATOS ---
+
+# -------------------------------------------------------------------------------------------------------------------------------
+# PREPARACION DE LOS DATOS
+# -------------------------------------------------------------------------------------------------------------------------------
 
 try:
     # Cargar los datos desde la HOJA ESPECIFICADA del archivo Excel
@@ -59,13 +65,12 @@ try:
         stats_df.to_excel(output_excel, index=False)
         print(f"Estadística descriptiva exportada a {output_excel}")
 
-        # --- CREACIÓN DE GRÁFICOS ---
+        # Creación de Gráficos
         output_dir = os.path.join(base_dir, 'Flujo', 'output', f'box_hist_plots_{variable}')
         os.makedirs(output_dir, exist_ok=True)
         plot_color = 'lightblue'
 
-        # --- CÓDIGO DEL BOXPLOT (Esta sección no cambia) ---
-        
+        # VIsualización del Diagrama de Caja
         fig, ax = plt.subplots(figsize=(5, 6))
         sns.boxplot(y=df[variable], color=plot_color, ax=ax, width=0.5)
         
@@ -90,28 +95,27 @@ try:
         ax.text(posicion_x_extremos, bigote_superior, f'Max: {bigote_superior*100:.2f}', va='center', ha='left', size='medium', color='black')
         ax.text(posicion_x_extremos, bigote_inferior, f'Min: {bigote_inferior*100:.2f}', va='center', ha='left', size='medium', color='black')
 
-        ax.set_title('Diagrama de Caja')
+        ax.set_title('Diagrama de Caja') # Título del diagrama de caja
 
         # Formateador para el eje Y del boxplot
         def percent_formatter_axis(y, pos):
             return f'{100 * y:.2f}' 
         ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter_axis))
 
-        ax.set_ylabel(f'{variable} (%)') # <-- Se sugiere añadir (%) aquí para coherencia
+        ax.set_ylabel(f'{variable} (%)') 
         ax.set_xlabel('')
         ax.set_xticks([])
-        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05))
+        ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05)) # Separación del gráfico y la leyenda
         
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, f'boxplot_final_con_valores_{variable}.png'))
         plt.close()
         
-        # --- HISTOGRAMA CON FORMATO CONDICIONAL ---
+        # HISTOGRAMAS
         plt.figure(figsize=(8, 6))
         sns.histplot(df[variable].dropna(), color=plot_color, bins=20, stat="density", label='Histograma')
         
-        # --- INICIO DE LA MODIFICACIÓN ---
-        # Lógica condicional para formatear el eje X del histograma
+        # Formato condicional del eje Y
         if mostrar_histograma_en_porcentaje:
             # Si es True, aplica el formato de porcentaje
             def percent_formatter(x, pos):
@@ -121,10 +125,9 @@ try:
         else:
             # Si es False, solo pone la etiqueta normal
             plt.xlabel(variable)
-        # --- FIN DE LA MODIFICACIÓN ---
 
-        plt.title('Histograma')
-        plt.ylabel('Densidad')
+        plt.title('Histograma') # Titulo del gráfico del histograma
+        plt.ylabel('Frecuencia')
         mu, std = norm.fit(df[variable].dropna())
         xmin, xmax = plt.xlim()
         x = np.linspace(xmin, xmax, 100)
@@ -137,9 +140,10 @@ try:
         print(f"Gráficos guardados en la carpeta: {output_dir}")
 
 except FileNotFoundError:
+     # Este error avisa si no existe la entrada de los datos
     print(f"Error: No se pudo encontrar el archivo de entrada en la ruta: {Entrada}")
 except ValueError:
     # Este error ahora te avisará si la hoja no existe
     print(f"Error: No se pudo encontrar la hoja '{nombre_de_la_hoja}' en el archivo. Revisa el nombre.")
 except Exception as e:
-    print(f"Ocurrió un error inesperado: {e}")
+    print(f"Ocurrió un error inesperado: {e}") # Avisa otro tipo de error
