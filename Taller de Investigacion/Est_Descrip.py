@@ -1,4 +1,4 @@
-# Estadistica Descriptiva
+# Análisis de variables con Estadistica Descriptiva
 
 import os
 import pandas as pd
@@ -146,4 +146,4 @@ except ValueError:
     # Este error ahora te avisará si la hoja no existe
     print(f"Error: No se pudo encontrar la hoja '{nombre_de_la_hoja}' en el archivo. Revisa el nombre.")
 except Exception as e:
-    print(f"Ocurrió un error inesperado: {e}") # Avisa otro tipo de error
+    print(f"Ocurrió un error inesperado: {e}") # Avisa otro tipo de errores
