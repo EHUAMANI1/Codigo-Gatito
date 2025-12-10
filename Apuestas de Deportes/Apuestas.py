@@ -45,12 +45,6 @@ if n_assets < 2:
 base_vol = np.maximum(0.10, 0.5 * np.abs(mu))  # vol mínima del 10%
 Sigma = np.diag(base_vol**2)
 
-print("\n=== DATOS LEÍDOS ===")
-print("Apuestas:", list(nombres_apuestas))
-print("Rentabilidades (mu):", mu)
-print("Sigma shape:", Sigma.shape)
-
-
 # =====================================
 # 3. FUNCIONES DE PORTAFOLIO Y OPTIMIZACIÓN
 # =====================================
@@ -263,7 +257,7 @@ plt.scatter(risk_agr, ret_agr, marker='*', s=200, label='Agresivo')
 
 plt.xlabel('Volatilidad')
 plt.ylabel('Rendimiento esperado (%)')
-plt.title('Frontera Eficiente de Markowitz')
+plt.title('Frontera Eficiente de las Apuestas')
 plt.grid(True)
 plt.colorbar(sc, label='Ratio de Sharpe')
 plt.legend()
