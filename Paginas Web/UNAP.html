@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para una gran amiga ✨</title>
+    <style>
+        /* ESTILOS (Diseño Festivo) */
+        body {
+            margin: 0; padding: 0; height: 100vh; display: flex;
+            justify-content: center; align-items: center;
+            /* Un degradado lila/azul muy "aesthetic" */
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container { text-align: center; z-index: 10; position: relative; }
+
+        /* Botón estilo "Burbuja" */
+        #btn-abrir {
+            padding: 15px 40px; font-size: 1.4rem; font-weight: bold;
+            background-color: #fff; color: #6a00f4;
+            border: none; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(106, 0, 244, 0.2);
+            transition: all 0.3s ease;
+        }
+        #btn-abrir:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 25px rgba(106, 0, 244, 0.3);
+            background-color: #f0f0f0;
+        }
+
+        /* La tarjeta */
+        .tarjeta {
+            display: none; background: rgba(255, 255, 255, 0.95);
+            padding: 40px; border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            max-width: 85%; width: 450px;
+            animation: popUp 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Rebote divertido */
+        }
+
+        h1 { color: #6a00f4; margin-bottom: 15px; font-size: 2rem; }
+        p { font-size: 1.3rem; color: #444; line-height: 1.6; }
+        
+        .destacado { color: #ff006e; font-weight: bold; }
+        .firma { margin-top: 25px; font-weight: bold; color: #6a00f4; font-size: 1.1rem; }
+
+        /* Animación de entrada con rebote */
+        @keyframes popUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Elementos cayendo (emojis) */
+        .emoji-caida {
+            position: absolute; top: -10vh;
+            font-size: 25px; user-select: none; z-index: 1;
+            animation: caer linear forwards;
+        }
+        @keyframes caer { to { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button id="btn-abrir" onclick="abrirSorpresa()">✨ Hola Pilar, abre esto porfis c:</button>
+
+        <div class="tarjeta" id="mensaje">
+            <h1>¡Holi Pilar! c:</h1>
+            <p>
+                Quería tomarme un segundo para decirte que me alegra tenerte en mi vida,
+                por llevarme a conocer Puno.
+                Espero seguir compartiendo buenos momentos contigo y crecer juntos.
+                Pronto la distancia solo quedará en el recuerdo.
+            </p>
+            <div class="firma">Atte: Gatito</div>
+        </div>
+    </div>
+
+    <audio id="miMusica" loop>
+        <source src="amiga.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function abrirSorpresa() {
+            document.getElementById('btn-abrir').style.display = 'none';
+            document.getElementById('mensaje').style.display = 'block';
+
+            // Reproducir música
+            var audio = document.getElementById("miMusica");
+            audio.volume = 0.4;
+            audio.play().catch(error => console.log("Error audio: " + error));
+
+            // Iniciar lluvia de emojis variados
+            crearFiesta();
+        }
+
+        function crearFiesta() {
+            // Lista de emojis para la lluvia
+            const emojis = ['🎉', '💖', '⭐', '🦄', '👯‍♀️', '🎈', '✨', '💜'];
+
+            setInterval(() => {
+                const elemento = document.createElement('div');
+                elemento.classList.add('emoji-caida');
+                
+                // Elegir un emoji al azar de la lista
+                elemento.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                elemento.style.left = Math.random() * 100 + 'vw';
+                elemento.style.fontSize = (Math.random() * 20 + 20) + 'px'; // Tamaño variado
+                elemento.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                
+                document.body.appendChild(elemento);
+
+                setTimeout(() => { elemento.remove(); }, 5000);
+            }, 200); // Caen más rápido (más fiesta)
+        }
+    </script>
+</body>
+</html>

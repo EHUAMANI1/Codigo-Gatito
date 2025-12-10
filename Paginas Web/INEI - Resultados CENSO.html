@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ❤️</title>
+    <style>
+        /* ESTILOS (El diseño) */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Para que los corazones no creen barras de desplazamiento */
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10; /* Para que el texto esté encima de los corazones */
+            position: relative;
+        }
+
+        /* El botón inicial */
+        #btn-abrir {
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.3s;
+            animation: latido 1.5s infinite;
+        }
+
+        #btn-abrir:hover {
+            transform: scale(1.1);
+            background-color: #d90429;
+        }
+
+        /* La tarjeta con el mensaje (oculta al principio) */
+        .tarjeta {
+            display: none; /* Oculto por defecto */
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+            width: 400px;
+            animation: aparecer 1s ease-out;
+            border: 2px solid #ffccd5;
+        }
+
+        h1 {
+            color: #d90429;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .firma {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ff4d6d;
+            font-style: italic;
+        }
+
+        /* Animaciones */
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo de los corazones que caen */
+        .corazon {
+            position: absolute;
+            top: -10vh;
+            color: #ff4d6d;
+            opacity: 0.8;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+            animation: caer linear forwards;
+        }
+
+        @keyframes caer {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button id="btn-abrir" onclick="abrirSorpresa()">🎁 Holi, tengo un detalle para ti</button>
+
+        <div class="tarjeta" id="mensaje">
+            <h1>¡Hola, María!</h1>
+            <p>
+                Desde que llegaste a mi vida, cada día tiene un brillo especial. 
+                No hay kilómetro que pueda apagar lo que siento.
+                <br><br>
+                Falta menos para que esta distancia sea solo un recuerdo.
+            </p>
+            <div class="firma">Con cariño, Gatito</div>
+        </div>
+    </div>
+
+    <script>
+        // LÓGICA
+        function abrirSorpresa() {
+            // Ocultar botón y mostrar tarjeta
+            document.getElementById('btn-abrir').style.display = 'none';
+            document.getElementById('mensaje').style.display = 'block';
+
+            // Iniciar música (opcional, requiere interacción previa del usuario en navegadores modernos)
+            // var audio = new Audio('ruta_de_tu_cancion.mp3');
+            // audio.play();
+
+            // Iniciar lluvia de corazones
+            crearLluvia();
+        }
+
+        function crearLluvia() {
+            setInterval(() => {
+                const corazon = document.createElement('div');
+                corazon.classList.add('corazon');
+                corazon.innerHTML = '❤️'; // Puedes cambiar esto por flores 🌸 o estrellas ⭐
+                
+                // Posición aleatoria en horizontal
+                corazon.style.left = Math.random() * 100 + 'vw';
+                
+                // Tamaño aleatorio
+                corazon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                
+                // Velocidad aleatoria
+                corazon.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+                document.body.appendChild(corazon);
+
+                // Eliminar el corazón después de que caiga para no llenar la memoria
+                setTimeout(() => {
+                    corazon.remove();
+                }, 5000);
+            }, 300); // Crea un corazón cada 300ms
+        }
+    </script>
+</body>
+</html>
