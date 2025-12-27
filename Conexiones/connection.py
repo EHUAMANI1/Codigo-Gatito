@@ -18,4 +18,6 @@ FINANZAS_FIBRA = f'https://www.dropbox.com/scl/fo/tpurhryy8hyh1yqwctb3u/h/FIBRA/
 FINANZAS_CUKIC = f'https://www.dropbox.com/scl/fo/tpurhryy8hyh1yqwctb3u/h/Cukic/Patriotas/Comit%C3%A9%20{finanzas_anlo_modelo}%20-%20{finanzas_mes_modelo}%20-%20{{dia}}?rlkey=deqi3gc4bk0jh54m65oeiwg4l&dl=1'
 FINANZAS_BENAVIDES = f'https://www.dropbox.com/scl/fo/tpurhryy8hyh1yqwctb3u/h/Benavides/Comit%C3%A9%20{finanzas_anlo_modelo}%20-%20{finanzas_mes_modelo}%20-%20{{dia}}?rlkey=deqi3gc4bk0jh54m65oeiwg4l&dl=1'
 
+# Tipo de Cambio SUNAT
+RESULTADO_TIPO_CAMBIO =  os.path.join(base_dir, "Flujo", "output", f"tipo_cambio_sunat_{timestamp}.csv")
 
