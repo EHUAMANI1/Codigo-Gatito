@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Happy Birthday ✨</title>
+    <style>
+        /* Fuentes modernas y limpias */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* Fondo oscuro con tonos morados profundos (El color que te gustó) */
+            background: linear-gradient(135deg, #120c29, #302b63, #24243e);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Círculos de fondo suaves */
+        .background-circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            /* Gradiente sutil para los círculos */
+            background: linear-gradient(45deg, rgba(255, 0, 204, 0.15), rgba(51, 51, 255, 0.15));
+            animation: float 25s infinite linear;
+            filter: blur(8px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 0.5; }
+            100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+        }
+
+        .card-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        /* Pantalla de introducción */
+        .intro-content {
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .intro-content:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilo para el icono principal */
+        .main-emoji {
+            font-size: 7rem;
+            display: inline-block;
+            /* Sombra de neón rosa/morada alrededor de la torta */
+            filter: drop-shadow(0 0 25px rgba(255, 0, 204, 0.8));
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 40px rgba(255, 0, 204, 1)); }
+        }
+
+        .click-instruction {
+            margin-top: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            /* Texto con gradiente */
+            background: linear-gradient(to right, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Tarjeta principal (oculta al inicio) */
+        .message-box {
+            display: none;
+            /* Efecto de vidrio esmerilado */
+            background: rgba(20, 20, 35, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.5);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .message-box.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin: 0 0 25px 0;
+            background: linear-gradient(to right, #ff66c4, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typewriter-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #f0f0f0;
+            min-height: 120px;
+            text-align: left;
+            font-weight: 300;
+        }
+
+        /* Cursor de escritura */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 22px;
+            background-color: #ff66c4;
+            margin-left: 5px;
+            animation: blink-cursor 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div class="background-circles" id="bg-circles"></div>
+
+    <div class="card-container">
+        
+        <div id="intro-screen" class="intro-content" onclick="celebrate()">
+            <span class="main-emoji">🎂</span>
+            <div class="click-instruction">Selecciona aqui ✨</div>
+        </div>
+
+        <div class="message-box" id="main-card">
+            <h1 id="title-text">¡Feliz Cumpleaños Pilar! 🎉</h1> 
+            
+            <div class="typewriter-text">
+                <span id="typing-area"></span><span class="cursor"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- CONFIGURACIÓN DEL FONDO ---
+        const bgContainer = document.getElementById('bg-circles');
+        for(let i = 0; i < 25; i++){
+            let circle = document.createElement('div');
+            circle.classList.add('circle');
+            let size = Math.random() * 120 + 50;
+            circle.style.width = `${size}px`;
+            circle.style.height = `${size}px`;
+            circle.style.left = `${Math.random() * 100}%`;
+            circle.style.top = `${Math.random() * 120}%`;
+            circle.style.animationDuration = `${Math.random() * 15 + 20}s`;
+            circle.style.animationDelay = `-${Math.random() * 20}s`; 
+            bgContainer.appendChild(circle);
+        }
+
+        // --- TU MENSAJE AQUÍ ---
+        // Edita esto con confianza. Usa \n para saltos de línea.
+        const myMessage = `Dicen que las mejores cosas llegan sin avisar, y conocerte ha sido una sorpresa increíble. Tienes una forma de ser que hace que todo parezca más simple y divertido.
+
+¡Disfruta mucho de tu día! Tqm gatito. ✨`;
+
+        // --- FUNCIONES PRINCIPALES ---
+        function celebrate() {
+            const intro = document.getElementById('intro-screen');
+            const card = document.getElementById('main-card');
+            
+            // 1. Animación de salida de la torta
+            intro.style.transform = "scale(0.8) translateY(-50px)";
+            intro.style.opacity = "0";
+            
+            setTimeout(() => {
+                intro.style.display = 'none';
+                card.style.display = 'block';
+                
+                // 2. Animación de entrada de la tarjeta y confeti
+                requestAnimationFrame(() => {
+                    card.classList.add('active');
+                    launchNeonConfetti();
+                    
+                    // 3. Iniciar efecto de escritura (con un pequeño retraso)
+                    setTimeout(startTyping, 500);
+                });
+            }, 300);
+        }
+
+        function launchNeonConfetti() {
+            // Confeti con los colores del tema (rosa, azul, morado)
+            const colors = ['#ff00cc', '#3333ff', '#00ffff', '#ffffff'];
+            
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: colors,
+                disableForcedPhysics: true
+            });
+        }
+
+        function startTyping() {
+            const textElement = document.getElementById('typing-area');
+            const cursor = document.querySelector('.cursor');
+            let i = 0;
+            const speed = 40; // Velocidad de escritura
+
+            function typeWriter() {
+                if (i < myMessage.length) {
+                    if (myMessage.charAt(i) === '\n') {
+                        textElement.innerHTML += '<br>';
+                    } else {
+                        textElement.innerHTML += myMessage.charAt(i);
+                    }
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    // Al terminar de escribir, el cursor parpadea 3 veces y desaparece
+                    setTimeout(() => { cursor.style.display = 'none'; }, 2000);
+                }
+            }
+            typeWriter();
+        }
+    </script>
+</body>
+</html>
