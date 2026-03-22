@@ -125,7 +125,7 @@ def generar_imagen_montecarlo():
     plt.axvspan(percentil_inf, percentil_sup, color='yellow', alpha=0.2, 
                 label=f'Intervalo de Confianza {NIVEL_CONFIANZA}%')
 
-    plt.title(f'Simulación Montecarlo: (Confianza: {NIVEL_CONFIANZA}%)', fontsize=14, fontweight='bold')
+    plt.title(f'Simulación Montecarlo', fontsize=14, fontweight='bold')
     plt.xlabel('Número de sobres', fontsize=12)
     plt.ylabel('Casos simulados', fontsize=12)
     plt.grid(True, linestyle=':', alpha=0.4, axis='y')
