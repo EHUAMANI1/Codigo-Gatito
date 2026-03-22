@@ -1,5 +1,5 @@
 # ALbum Mundial y Eurocopa
-# Creado por Eduardo Huamani     23/03/26
+# Creado por Eduardo Huamani     22/03/26
 
 import os
 import pandas as pd
@@ -7,11 +7,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # =====================================================================
-# 1. PARÁMETROS Y CONFIGURACIÓN (Tu panel de control)
+# 1. PARÁMETROS Y CONFIGURACIÓN 
 # =====================================================================
 TOTAL_FIGUS = 674       # Total de figuras diferentes en el album
 FIGUS_POR_SOBRE = 7     # Cantidad de figuras por sobre
-FIGURITAS_PEGADAS = 71  # Figuras diferentes pegadas en el album
+FIGURITAS_PEGADAS = 86  # Figuras diferentes pegadas en el album
 
 LIMITE_REPETIDAS = 3    # Límite de tolerancia 
 
