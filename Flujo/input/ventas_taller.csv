@@ -1,0 +1,181 @@
+fecha,producto,categoria,region,canal,cliente_id,ventas,costo,margen
+2023-01-04,Silla ergonómica,Mobiliario,Trujillo,En línea,CLI-0014,823.57,535.34,288.23
+2023-01-05,Escritorio,Mobiliario,Trujillo,Tienda física,CLI-0022,4631.20,3437.46,1193.74
+2023-01-05,Laptop,Tecnología,Arequipa,Venta telefónica,CLI-0054,3360.18,2447.64,912.54
+2023-01-07,Audífonos,Accesorios,Arequipa,En línea,CLI-0021,258.64,149.85,108.79
+2023-01-07,Escritorio,Mobiliario,Piura,En línea,CLI-0032,3390.60,2333.14,1057.46
+2023-01-07,Teclado,Accesorios,Arequipa,En línea,CLI-0031,756.60,394.90,361.70
+2023-01-10,Monitor,Tecnología,Lima,Tienda física,CLI-0005,4318.40,2829.66,1488.74
+2023-01-12,Laptop,Tecnología,Lima,En línea,CLI-0032,2967.62,2345.70,621.92
+2023-01-16,Mouse,Accesorios,Trujillo,Tienda física,CLI-0003,180.20,85.85,94.35
+2023-01-18,Laptop,Tecnología,Arequipa,En línea,CLI-0008,2961.39,2372.03,589.36
+2023-01-20,Escritorio,Mobiliario,Piura,Venta telefónica,CLI-0039,1044.80,778.92,265.88
+2023-01-22,Audífonos,Accesorios,Cusco,En línea,CLI-0050,482.28,281.70,200.58
+2023-01-23,Silla ergonómica,Mobiliario,Cusco,Tienda física,CLI-0038,1487.16,1032.98,454.18
+2023-01-24,Monitor,Tecnología,Trujillo,Venta telefónica,CLI-0039,813.98,527.06,286.92
+2023-01-25,Monitor,Tecnología,Arequipa,En línea,CLI-0005,3389.48,2356.51,1032.97
+2023-01-26,Impresora,Tecnología,Trujillo,Venta telefónica,CLI-0007,2041.32,1251.52,789.80
+2023-01-26,Teclado,Accesorios,Lima,En línea,CLI-0038,704.60,374.35,330.25
+2023-01-29,Impresora,Tecnología,Piura,En línea,CLI-0039,2873.84,1797.73,1076.11
+2023-02-01,Silla ergonómica,Mobiliario,Lima,Venta telefónica,CLI-0008,816.77,539.14,277.63
+2023-02-03,Impresora,Tecnología,Trujillo,Tienda física,CLI-0012,2660.44,1778.81,881.63
+2023-02-03,Monitor,Tecnología,Arequipa,Tienda física,CLI-0035,2704.59,1925.73,778.86
+2023-02-10,Monitor,Tecnología,Piura,Tienda física,CLI-0013,871.15,609.98,261.17
+2023-02-12,Escritorio,Mobiliario,Cusco,En línea,CLI-0038,3532.59,2593.51,939.08
+2023-02-21,Silla ergonómica,Mobiliario,Lima,Tienda física,CLI-0034,776.96,494.43,282.53
+2023-02-21,Teclado,Accesorios,Trujillo,Venta telefónica,CLI-0020,130.14,70.03,60.11
+2023-02-23,Silla ergonómica,Mobiliario,Lima,Venta telefónica,CLI-0012,1640.00,1080.64,559.36
+2023-02-23,Teclado,Accesorios,Arequipa,En línea,CLI-0017,150.90,82.45,68.45
+2023-02-24,Laptop,Tecnología,Arequipa,Venta telefónica,CLI-0047,3495.14,2630.46,864.68
+2023-02-26,Escritorio,Mobiliario,Lima,Tienda física,CLI-0022,2116.18,1476.36,639.82
+2023-02-26,Laptop,Tecnología,Lima,Tienda física,CLI-0013,12966.52,9581.17,3385.35
+2023-02-27,Monitor,Tecnología,Arequipa,Venta telefónica,CLI-0043,802.27,539.48,262.79
+2023-03-05,Silla ergonómica,Mobiliario,Trujillo,Venta telefónica,CLI-0035,788.19,532.27,255.92
+2023-03-07,Silla ergonómica,Mobiliario,Cusco,Venta telefónica,CLI-0005,1549.50,993.13,556.37
+2023-03-09,Impresora,Tecnología,Lima,Tienda física,CLI-0014,1283.28,793.99,489.29
+2023-03-09,Teclado,Accesorios,Trujillo,Venta telefónica,CLI-0029,147.64,78.18,69.46
+2023-03-10,Laptop,Tecnología,Cusco,Venta telefónica,CLI-0047,3113.46,2383.62,729.84
+2023-03-11,Mouse,Accesorios,Piura,En línea,CLI-0008,96.72,48.95,47.77
+2023-03-15,Silla ergonómica,Mobiliario,Trujillo,Tienda física,CLI-0023,737.35,471.12,266.23
+2023-03-18,Mouse,Accesorios,Arequipa,Venta telefónica,CLI-0033,268.71,132.35,136.36
+2023-03-22,Impresora,Tecnología,Arequipa,En línea,CLI-0054,1399.50,893.46,506.04
+2023-03-22,Laptop,Tecnología,Trujillo,En línea,CLI-0014,10172.25,7325.01,2847.24
+2023-03-22,Silla ergonómica,Mobiliario,Piura,Venta telefónica,CLI-0018,742.09,476.83,265.26
+2023-03-23,Teclado,Accesorios,Piura,Venta telefónica,CLI-0036,400.95,198.73,202.22
+2023-03-27,Audífonos,Accesorios,Lima,Tienda física,CLI-0016,849.93,482.60,367.33
+2023-03-29,Escritorio,Mobiliario,Arequipa,Tienda física,CLI-0018,3175.41,2230.60,944.81
+2023-03-29,Mouse,Accesorios,Cusco,En línea,CLI-0058,331.76,162.31,169.45
+2023-03-31,Teclado,Accesorios,Lima,En línea,CLI-0018,704.55,378.24,326.31
+2023-04-01,Silla ergonómica,Mobiliario,Arequipa,Venta telefónica,CLI-0059,1462.84,962.46,500.38
+2023-04-01,Silla ergonómica,Mobiliario,Piura,Venta telefónica,CLI-0007,850.40,536.46,313.94
+2023-04-02,Laptop,Tecnología,Trujillo,Venta telefónica,CLI-0013,3332.01,2674.94,657.07
+2023-04-07,Impresora,Tecnología,Arequipa,Tienda física,CLI-0010,1279.44,793.45,485.99
+2023-04-08,Escritorio,Mobiliario,Trujillo,Venta telefónica,CLI-0011,4108.76,2934.31,1174.45
+2023-04-08,Monitor,Tecnología,Lima,Tienda física,CLI-0055,919.57,628.23,291.34
+2023-04-09,Silla ergonómica,Mobiliario,Cusco,Venta telefónica,CLI-0060,851.12,537.54,313.58
+2023-04-10,Escritorio,Mobiliario,Cusco,En línea,CLI-0050,2414.84,1729.61,685.23
+2023-04-10,Monitor,Tecnología,Arequipa,En línea,CLI-0059,1579.64,1106.54,473.10
+2023-04-12,Escritorio,Mobiliario,Arequipa,En línea,CLI-0020,2283.56,1666.80,616.76
+2023-04-12,Monitor,Tecnología,Trujillo,Venta telefónica,CLI-0005,2737.47,1888.53,848.94
+2023-04-13,Monitor,Tecnología,Lima,En línea,CLI-0023,832.02,571.66,260.36
+2023-04-15,Escritorio,Mobiliario,Arequipa,Venta telefónica,CLI-0032,1128.74,849.36,279.38
+2023-04-15,Monitor,Tecnología,Lima,Tienda física,CLI-0052,2725.23,1892.48,832.75
+2023-04-25,Audífonos,Accesorios,Piura,Tienda física,CLI-0056,502.60,298.97,203.63
+2023-04-26,Laptop,Tecnología,Cusco,Tienda física,CLI-0004,6301.90,4856.11,1445.79
+2023-04-27,Impresora,Tecnología,Lima,En línea,CLI-0055,1490.32,912.55,577.77
+2023-04-27,Impresora,Tecnología,Arequipa,Tienda física,CLI-0003,2654.08,1774.30,879.78
+2023-04-30,Impresora,Tecnología,Arequipa,En línea,CLI-0047,1517.94,1020.80,497.14
+2023-04-30,Impresora,Tecnología,Trujillo,Venta telefónica,CLI-0058,1290.12,797.42,492.70
+2023-05-01,Audífonos,Accesorios,Arequipa,Venta telefónica,CLI-0028,552.88,321.70,231.18
+2023-05-06,Mouse,Accesorios,Lima,Venta telefónica,CLI-0036,87.68,40.52,47.16
+2023-05-08,Impresora,Tecnología,Arequipa,Tienda física,CLI-0036,1362.44,914.55,447.89
+2023-05-09,Audífonos,Accesorios,Trujillo,Tienda física,CLI-0039,803.40,457.32,346.08
+2023-05-09,Mouse,Accesorios,Arequipa,Tienda física,CLI-0023,167.40,78.41,88.99
+2023-05-09,Teclado,Accesorios,Lima,Venta telefónica,CLI-0006,144.52,76.88,67.64
+2023-05-10,Teclado,Accesorios,Arequipa,En línea,CLI-0029,265.34,132.60,132.74
+2023-05-18,Escritorio,Mobiliario,Trujillo,En línea,CLI-0025,2135.82,1504.13,631.69
+2023-05-24,Mouse,Accesorios,Lima,Tienda física,CLI-0019,85.31,42.74,42.57
+2023-05-25,Audífonos,Accesorios,Arequipa,Tienda física,CLI-0046,801.36,437.60,363.76
+2023-05-27,Mouse,Accesorios,Lima,Tienda física,CLI-0003,91.20,41.37,49.83
+2023-06-02,Impresora,Tecnología,Cusco,Tienda física,CLI-0017,1418.76,932.51,486.25
+2023-06-11,Audífonos,Accesorios,Arequipa,Venta telefónica,CLI-0027,548.62,319.42,229.20
+2023-06-11,Mouse,Accesorios,Trujillo,Venta telefónica,CLI-0012,395.96,195.23,200.73
+2023-06-13,Escritorio,Mobiliario,Lima,Venta telefónica,CLI-0054,1162.51,793.21,369.30
+2023-06-15,Laptop,Tecnología,Cusco,En línea,CLI-0019,10537.80,7727.19,2810.61
+2023-06-15,Monitor,Tecnología,Cusco,Tienda física,CLI-0027,2662.86,1752.26,910.60
+2023-06-15,Monitor,Tecnología,Piura,En línea,CLI-0060,829.27,532.14,297.13
+2023-06-20,Teclado,Accesorios,Lima,Tienda física,CLI-0026,137.73,67.89,69.84
+2023-06-21,Impresora,Tecnología,Cusco,En línea,CLI-0027,715.39,451.85,263.54
+2023-06-22,Audífonos,Accesorios,Cusco,En línea,CLI-0044,851.58,470.32,381.26
+2023-06-22,Mouse,Accesorios,Arequipa,Tienda física,CLI-0060,195.50,91.79,103.71
+2023-06-25,Audífonos,Accesorios,Cusco,En línea,CLI-0041,246.63,134.59,112.04
+2023-06-27,Escritorio,Mobiliario,Arequipa,En línea,CLI-0055,2406.98,1667.56,739.42
+2023-06-27,Monitor,Tecnología,Arequipa,Tienda física,CLI-0009,918.41,643.07,275.34
+2023-06-29,Laptop,Tecnología,Arequipa,En línea,CLI-0024,6594.38,4988.30,1606.08
+2023-06-29,Mouse,Accesorios,Piura,Venta telefónica,CLI-0020,424.95,199.60,225.35
+2023-06-29,Silla ergonómica,Mobiliario,Piura,Tienda física,CLI-0018,761.31,517.94,243.37
+2023-07-08,Audífonos,Accesorios,Trujillo,Venta telefónica,CLI-0051,243.98,142.94,101.04
+2023-07-10,Mouse,Accesorios,Piura,En línea,CLI-0019,177.58,84.88,92.70
+2023-07-11,Laptop,Tecnología,Cusco,Tienda física,CLI-0009,11817.52,9357.00,2460.52
+2023-07-14,Monitor,Tecnología,Arequipa,Tienda física,CLI-0019,832.42,564.51,267.91
+2023-07-16,Impresora,Tecnología,Cusco,En línea,CLI-0057,741.43,467.21,274.22
+2023-07-17,Audífonos,Accesorios,Arequipa,En línea,CLI-0052,275.12,153.92,121.20
+2023-07-19,Teclado,Accesorios,Lima,Tienda física,CLI-0057,291.58,146.39,145.19
+2023-07-20,Impresora,Tecnología,Trujillo,Tienda física,CLI-0052,1984.14,1243.43,740.71
+2023-07-20,Mouse,Accesorios,Trujillo,En línea,CLI-0037,254.58,125.73,128.85
+2023-07-23,Audífonos,Accesorios,Lima,En línea,CLI-0055,508.26,297.93,210.33
+2023-07-24,Audífonos,Accesorios,Arequipa,Tienda física,CLI-0031,551.08,309.73,241.35
+2023-07-24,Teclado,Accesorios,Piura,En línea,CLI-0044,135.67,68.47,67.20
+2023-07-28,Silla ergonómica,Mobiliario,Trujillo,Venta telefónica,CLI-0019,851.86,564.15,287.71
+2023-08-01,Monitor,Tecnología,Lima,Tienda física,CLI-0046,923.53,646.69,276.84
+2023-08-03,Mouse,Accesorios,Trujillo,Tienda física,CLI-0051,248.79,125.39,123.40
+2023-08-03,Silla ergonómica,Mobiliario,Cusco,Tienda física,CLI-0003,2241.93,1416.86,825.07
+2023-08-04,Silla ergonómica,Mobiliario,Cusco,Tienda física,CLI-0038,814.69,515.68,299.01
+2023-08-04,Silla ergonómica,Mobiliario,Cusco,Venta telefónica,CLI-0046,2895.80,1953.60,942.20
+2023-08-06,Escritorio,Mobiliario,Cusco,En línea,CLI-0009,2360.84,1651.67,709.17
+2023-08-07,Silla ergonómica,Mobiliario,Piura,Venta telefónica,CLI-0012,1655.30,1135.86,519.44
+2023-08-08,Mouse,Accesorios,Cusco,En línea,CLI-0035,293.19,146.37,146.82
+2023-08-08,Teclado,Accesorios,Arequipa,Tienda física,CLI-0004,405.57,202.04,203.53
+2023-08-09,Laptop,Tecnología,Trujillo,En línea,CLI-0025,6392.22,4891.48,1500.74
+2023-08-10,Escritorio,Mobiliario,Arequipa,Tienda física,CLI-0024,1141.06,813.15,327.91
+2023-08-14,Teclado,Accesorios,Lima,Venta telefónica,CLI-0048,275.12,135.80,139.32
+2023-08-15,Silla ergonómica,Mobiliario,Lima,Venta telefónica,CLI-0038,2158.23,1450.77,707.46
+2023-08-16,Escritorio,Mobiliario,Trujillo,En línea,CLI-0010,1026.99,769.86,257.13
+2023-08-17,Audífonos,Accesorios,Trujillo,En línea,CLI-0011,266.01,151.19,114.82
+2023-08-19,Impresora,Tecnología,Arequipa,Tienda física,CLI-0046,682.21,436.35,245.86
+2023-08-19,Laptop,Tecnología,Piura,Tienda física,CLI-0037,3428.73,2709.76,718.97
+2023-08-20,Monitor,Tecnología,Piura,En línea,CLI-0043,784.39,546.41,237.98
+2023-08-21,Silla ergonómica,Mobiliario,Piura,En línea,CLI-0034,1708.52,1104.74,603.78
+2023-08-22,Monitor,Tecnología,Arequipa,Venta telefónica,CLI-0054,3231.72,2299.72,932.00
+2023-08-25,Silla ergonómica,Mobiliario,Piura,En línea,CLI-0009,1501.66,1048.87,452.79
+2023-08-26,Audífonos,Accesorios,Piura,Venta telefónica,CLI-0052,566.28,342.74,223.54
+2023-08-26,Monitor,Tecnología,Lima,En línea,CLI-0010,1681.54,1076.19,605.35
+2023-09-01,Audífonos,Accesorios,Cusco,Venta telefónica,CLI-0005,1076.48,607.13,469.35
+2023-09-07,Impresora,Tecnología,Piura,En línea,CLI-0044,1333.34,830.56,502.78
+2023-09-10,Impresora,Tecnología,Lima,En línea,CLI-0045,2193.51,1358.90,834.61
+2023-09-14,Impresora,Tecnología,Cusco,En línea,CLI-0039,692.81,449.83,242.98
+2023-09-14,Silla ergonómica,Mobiliario,Cusco,Venta telefónica,CLI-0016,3349.24,2111.39,1237.85
+2023-09-15,Escritorio,Mobiliario,Lima,En línea,CLI-0014,1181.03,853.15,327.88
+2023-09-15,Impresora,Tecnología,Lima,Venta telefónica,CLI-0040,669.68,439.70,229.98
+2023-09-18,Silla ergonómica,Mobiliario,Trujillo,En línea,CLI-0011,1610.06,1016.16,593.90
+2023-09-24,Teclado,Accesorios,Cusco,Venta telefónica,CLI-0042,395.28,205.94,189.34
+2023-09-25,Escritorio,Mobiliario,Cusco,Venta telefónica,CLI-0054,2244.40,1581.56,662.84
+2023-09-26,Audífonos,Accesorios,Lima,En línea,CLI-0041,247.77,142.20,105.57
+2023-09-26,Laptop,Tecnología,Trujillo,En línea,CLI-0027,6936.16,5523.89,1412.27
+2023-09-27,Mouse,Accesorios,Trujillo,Tienda física,CLI-0013,294.54,135.86,158.68
+2023-09-27,Mouse,Accesorios,Piura,Tienda física,CLI-0011,192.54,88.00,104.54
+2023-09-30,Silla ergonómica,Mobiliario,Piura,En línea,CLI-0031,727.08,472.74,254.34
+2023-10-05,Impresora,Tecnología,Piura,Tienda física,CLI-0050,1326.04,811.89,514.15
+2023-10-10,Silla ergonómica,Mobiliario,Trujillo,En línea,CLI-0024,3040.16,2063.35,976.81
+2023-10-15,Monitor,Tecnología,Piura,En línea,CLI-0019,2773.50,1996.34,777.16
+2023-10-17,Laptop,Tecnología,Lima,Venta telefónica,CLI-0003,3359.98,2598.83,761.15
+2023-10-19,Teclado,Accesorios,Cusco,Venta telefónica,CLI-0031,297.84,153.58,144.26
+2023-10-20,Laptop,Tecnología,Cusco,En línea,CLI-0054,3489.26,2586.93,902.33
+2023-10-20,Teclado,Accesorios,Arequipa,En línea,CLI-0004,748.50,402.95,345.55
+2023-10-21,Teclado,Accesorios,Piura,Tienda física,CLI-0044,133.09,66.65,66.44
+2023-10-23,Laptop,Tecnología,Lima,Venta telefónica,CLI-0055,6128.54,4379.72,1748.82
+2023-10-28,Mouse,Accesorios,Lima,En línea,CLI-0048,89.98,42.80,47.18
+2023-10-30,Escritorio,Mobiliario,Lima,En línea,CLI-0048,1050.98,758.11,292.87
+2023-10-30,Silla ergonómica,Mobiliario,Trujillo,Venta telefónica,CLI-0037,2482.89,1634.16,848.73
+2023-11-03,Impresora,Tecnología,Lima,Tienda física,CLI-0011,1340.46,853.27,487.19
+2023-11-08,Audífonos,Accesorios,Arequipa,Venta telefónica,CLI-0030,760.71,427.85,332.86
+2023-11-10,Audífonos,Accesorios,Trujillo,Tienda física,CLI-0014,254.25,155.65,98.60
+2023-11-10,Audífonos,Accesorios,Arequipa,En línea,CLI-0006,269.19,149.60,119.59
+2023-11-13,Silla ergonómica,Mobiliario,Arequipa,Tienda física,CLI-0042,2377.77,1566.04,811.73
+2023-11-21,Impresora,Tecnología,Lima,En línea,CLI-0011,653.45,412.97,240.48
+2023-11-24,Impresora,Tecnología,Piura,Venta telefónica,CLI-0007,3412.70,2178.39,1234.31
+2023-12-01,Laptop,Tecnología,Cusco,En línea,CLI-0003,15744.80,12669.75,3075.05
+2023-12-02,Impresora,Tecnología,Arequipa,Tienda física,CLI-0024,1438.00,954.79,483.21
+2023-12-04,Mouse,Accesorios,Lima,Tienda física,CLI-0029,188.68,95.38,93.30
+2023-12-09,Mouse,Accesorios,Trujillo,En línea,CLI-0011,86.19,40.14,46.05
+2023-12-14,Silla ergonómica,Mobiliario,Lima,Tienda física,CLI-0046,2153.22,1500.42,652.80
+2023-12-16,Laptop,Tecnología,Lima,Venta telefónica,CLI-0041,9861.63,7455.76,2405.87
+2023-12-17,Audífonos,Accesorios,Trujillo,Tienda física,CLI-0057,257.07,155.63,101.44
+2023-12-17,Audífonos,Accesorios,Arequipa,En línea,CLI-0037,491.14,287.14,204.00
+2023-12-21,Silla ergonómica,Mobiliario,Piura,Tienda física,CLI-0036,2252.55,1489.63,762.92
+2023-12-21,Teclado,Accesorios,Lima,Tienda física,CLI-0008,386.61,211.18,175.43
+2023-12-23,Audífonos,Accesorios,Trujillo,En línea,CLI-0003,512.96,301.77,211.19
+2023-12-23,Mouse,Accesorios,Cusco,Venta telefónica,CLI-0033,191.32,95.67,95.65
+2023-12-24,Teclado,Accesorios,Piura,Tienda física,CLI-0043,388.44,195.13,193.31
+2023-12-26,Laptop,Tecnología,Lima,Tienda física,CLI-0039,6625.10,5050.31,1574.79
+2023-12-28,Silla ergonómica,Mobiliario,Cusco,Tienda física,CLI-0044,823.68,543.69,279.99

@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # =====================================================================
 TOTAL_FIGUS = 674       # Total de figuras diferentes en el album
 FIGUS_POR_SOBRE = 7     # Cantidad de figuras por sobre
-FIGURITAS_PEGADAS = 86  # Figuras diferentes pegadas en el album
+FIGURITAS_PEGADAS = 294  # Figuras diferentes pegadas en el album
 
 LIMITE_REPETIDAS = 3    # Límite de tolerancia 
 
